@@ -24,8 +24,8 @@ app.use(bodyParser.urlencoded({
     extended: true 
 }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'static')));
-app.use(favicon(path.join(__dirname, 'static', 'favicon.ico')));
+app.use(express.static(path.join(__dirname, 'src')));
+app.use(favicon(path.join(__dirname, 'favicon.ico')));
 
 
 app.listen(PORT, function () {
