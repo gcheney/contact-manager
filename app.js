@@ -13,6 +13,9 @@ const port = process.env.PORT || 3000;
 const app = express();
 const compiler = webpack(config);
 
+//import database
+import './api/models/db';
+
 // use logging in development and compression in production
 if (process.env.NODE_ENV === 'development') {
     app.use(logger('dev'));
@@ -37,12 +40,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'src')));
 app.use(favicon(path.join(__dirname, 'favicon.ico')));
 
-
-app.get('/', function(req, res) {
-  res.sendFile(path.join( __dirname, './src/index.html'));
+app.use((req, res) => {
+  res.sendFile(path.join( __dirname, 'src', 'index.html'));
 });
 
-app.listen(port, function(err) {
+app.listen(port, (err) => {
   if (err) {
     console.log(err);
   } else {
