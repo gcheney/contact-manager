@@ -8,13 +8,12 @@ import compress from 'compression';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import favicon from 'serve-favicon';
+import './api/models/db';
+import apiRoutes from './api/routes/index';
 
 const port = process.env.PORT || 3000;
 const app = express();
 const compiler = webpack(config);
-
-//import database
-import './api/models/db';
 
 // use logging in development and compression in production
 if (process.env.NODE_ENV === 'development') {
@@ -40,10 +39,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'src')));
 app.use(favicon(path.join(__dirname, 'favicon.ico')));
 
-app.use((req, res) => {
+// api setup
+app.use('/api', apiRoutes);
+
+//send react app to client
+app.get('/', (req, res) => {
   res.sendFile(path.join( __dirname, 'src', 'index.html'));
 });
 
+// app listen
 app.listen(port, (err) => {
   if (err) {
     console.log(err);
@@ -52,3 +56,5 @@ app.listen(port, (err) => {
     console.log('Server running at http://127.0.0.1:' + port);
   }
 });
+
+module.exports = app;
