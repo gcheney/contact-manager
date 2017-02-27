@@ -43,8 +43,8 @@ app.use(favicon(path.join(__dirname, 'favicon.ico')));
 app.use('/api', apiRoutes);
 
 //send react app to client
-app.get('/', (req, res) => {
-  res.sendFile(path.join( __dirname, 'src', 'index.html'));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'src', 'index.html'));
 });
 
 // app listen
