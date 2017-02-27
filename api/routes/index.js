@@ -1,6 +1,7 @@
 import express from 'express';
-const router = express.Router();
 import contactController from '../controllers/contactController';
+
+const router = express.Router();
 
 /* Create */
 router.post('/contacts', contactController.create);
