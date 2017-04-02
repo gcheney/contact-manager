@@ -8,6 +8,9 @@ class ContactPage extends React.Component {
         this.state = {
             contact: { firstName : null }
         }
+
+        this.onFirstNameChange = this.onFirstNameChange.bind(this);
+        this.onClickSave = this.onClickSave.bind(this);
     }
 
     onFirstNameChange(event) {
@@ -16,16 +19,25 @@ class ContactPage extends React.Component {
         this.setState({ contact: contact });
     }
 
+    onClickSave() {
+        alert(`Saving ${this.state.contact.firstName}`);
+    }
+
     render() {
         return (
-            <div className="well">
-                <h1 className="text-center">Your Contacts</h1>
-                <h2>Add Contact</h2>
-                <div className="form-group">
-                    <input type="text" onChange={this.onFirstNameChange} value={this.state.contact.firstName} />
-                </div>
-                <div className="form-group">
-                    <input type="submit" className="btn btn-success" value="Save" onClick={this.onClickSave} />
+            <div className="row">
+                <div className="col-md-6 col-md-offset-3">
+                    <div className="well">
+                        <h1 className="text-center">Your Contacts</h1>
+                        <h2>Add Contact</h2>
+                        <div className="form-group">
+                            <label for="firstName">First Name: </label>
+                            <input type="text" className="form-control" onChange={this.onFirstNameChange} value={this.state.contact.firstName} />
+                        </div>
+                        <div className="form-group">
+                            <input type="submit" className="btn btn-success" value="Save" onClick={this.onClickSave} />
+                        </div>
+                    </div>
                 </div>
             </div>
         );
