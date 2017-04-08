@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import * as contactActions from '../../actions.contactActions';
 
 class ContactPage extends React.Component {
 
@@ -20,7 +22,8 @@ class ContactPage extends React.Component {
     }
 
     onClickSave() {
-        alert(`Saving ${this.state.contact.firstName}`);
+        //alert(`Saving ${this.state.contact.firstName}`);
+        this.props.dispatch(contactActions.createContact(this.state.contact));
     }
 
     render() {
@@ -44,4 +47,10 @@ class ContactPage extends React.Component {
     }
 }
 
-export default ContactPage;
+function mapStateToProps(state, ownProps) {
+    return {
+        contacts: state.contacts
+    };
+}
+
+export default connect(mapStateToProps)(ContactPage);
