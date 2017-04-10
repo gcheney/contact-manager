@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import * as contactActions from '../../actions.contactActions';
+import * as contactActions from '../../actions/contactActions';
 
 class ContactPage extends React.Component {
 
