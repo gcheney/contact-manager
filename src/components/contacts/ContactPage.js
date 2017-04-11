@@ -8,7 +8,7 @@ class ContactPage extends React.Component {
         super(props, context);
 
         this.state = {
-            contact: { firstName : null }
+            contact: { firstName : '' }
         }
 
         this.onFirstNameChange = this.onFirstNameChange.bind(this);
@@ -26,16 +26,23 @@ class ContactPage extends React.Component {
         this.props.dispatch(contactActions.createContact(this.state.contact));
     }
 
+    contactRow(contact, index) {
+        return <div key={index}>{contact.firstName}</div>;
+    }
+
     render() {
         return (
             <div className="row">
                 <div className="col-md-6 col-md-offset-3">
                     <div className="well">
                         <h1 className="text-center">Your Contacts</h1>
+                        {this.props.contacts.map(this.contactRow)}
                         <h2>Add Contact</h2>
                         <div className="form-group">
                             <label for="firstName">First Name: </label>
-                            <input type="text" className="form-control" onChange={this.onFirstNameChange} value={this.state.contact.firstName} />
+                            <input type="text" placeholder="First Name" 
+                                className="form-control" onChange={this.onFirstNameChange} 
+                                value={this.state.contact.firstName} />
                         </div>
                         <div className="form-group">
                             <input type="submit" className="btn btn-success" value="Save" onClick={this.onClickSave} />
@@ -46,6 +53,11 @@ class ContactPage extends React.Component {
         );
     }
 }
+
+ContactPage.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    contacts: PropTypes.array.isRequired
+};
 
 function mapStateToProps(state, ownProps) {
     return {
