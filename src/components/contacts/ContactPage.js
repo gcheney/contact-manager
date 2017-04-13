@@ -23,7 +23,8 @@ class ContactPage extends React.Component {
 
     onClickSave() {
         //alert(`Saving ${this.state.contact.firstName}`);
-        this.props.dispatch(contactActions.createContact(this.state.contact));
+        //this.props.dispatch(contactActions.createContact(this.state.contact));
+        this.props.createContact(this.state.contact);
     }
 
     contactRow(contact, index) {
@@ -55,8 +56,8 @@ class ContactPage extends React.Component {
 }
 
 ContactPage.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    contacts: PropTypes.array.isRequired
+    contacts: PropTypes.array.isRequired,
+    createContact: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
@@ -65,4 +66,10 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-export default connect(mapStateToProps)(ContactPage);
+function mapDispacthToProps(dispatch) {
+    return {
+        createContact: (contact) => dispatch(contactActions.createContact(contact)) 
+    };
+}
+
+export default connect(mapStateToProps, mapDispacthToProps)(ContactPage);
