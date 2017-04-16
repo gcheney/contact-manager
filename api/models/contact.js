@@ -5,6 +5,7 @@ var contactSchema = mongoose.Schema({
     firstName: {
         type: String,
         maxlength: 100, 
+        minLength: 1,
         required: true    
     },
     lastName: {
